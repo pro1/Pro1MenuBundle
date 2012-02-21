@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="pro1_menu.menu_manager.class">Pro1\MenuBundle\Menu\MenuManager</parameter>
+        <parameter key="pro1_menu.menu_provider.configuration_aware.class">Pro1\MenuBundle\Provider\ConfigurationAwareProvider</parameter>
+        <parameter key="pro1_menu.menu.configuration"/>
+    </parameters>
+
+    <services>
+        <service id="pro1_menu.menu_manager" class="%pro1_menu.menu_manager.class%">
+            <argument type="service" id="service_container" />
+            <argument type="service" id="knp_menu.factory" />
+            <argument>%pro1_menu.menu.configuration%</argument>
+        </service>
+
+        <service id="pro1_menu.menu_provider.configuration_aware" class="%pro1_menu.menu_provider.configuration_aware.class%" public="false">
+            <tag name="knp_menu.provider" />
+            <argument type="service" id="service_container" />
+            <argument type="service" id="pro1_menu.menu_manager" />
+        </service>
+    </services>
+</container>
