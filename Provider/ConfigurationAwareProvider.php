@@ -33,7 +33,7 @@ class ConfigurationAwareProvider implements MenuProviderInterface
      * @return ItemInterface
      * @throws \InvalidArgumentException
      */
-    public function get($name)
+    public function get($name, array $options = array())
     {
         if (!$this->menuManager->has($name)) {
             throw new \InvalidArgumentException(sprintf('The menu "%s" is not defined.', $name));
@@ -48,7 +48,7 @@ class ConfigurationAwareProvider implements MenuProviderInterface
      * @param string $name
      * @return bool
      */
-    public function has($name)
+    public function has($name, array $options = array())
     {
         return $this->menuManager->has($name);
     }
